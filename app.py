@@ -9,11 +9,23 @@ import numpy as np
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.vgg19 import preprocess_input as vgg19_preprocess
 from tensorflow.keras.applications.mobilenet import preprocess_input as mobilenet_preprocess
+import gdown
 
 UPLOAD_FOLDER = 'static/uploads'
 HEATMAP_FOLDER = 'static/heatmaps'
 DB_FILE = 'patients.db'
 IMG_SIZE = (224, 224)
+
+
+file_id = "1739NOnacTzMO2ceYklHdfhp_LrC3UZPy"
+
+url = f"https://drive.google.com/uc?id={file_id}"
+
+output = "vgg19_mobilenet_fusion.keras"
+
+gdown.download(url, output, quiet=False)
+
+
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(HEATMAP_FOLDER, exist_ok=True)
