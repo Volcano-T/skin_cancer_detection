@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lesion Classifier</title>
+
+    <style>
+        /* Reset & font */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 50px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+            font-size: 28px;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        form .section {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        select,
+        input[type="file"] {
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]::placeholder {
+            color: #f0f0f0;
+        }
+
+        input[type="text"]:focus,
+        select:focus,
+        input[type="file"]:focus {
+            background: rgba(255,255,255,0.3);
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: #ff416c;  /* Gradient fallback */
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255,65,108,0.4);
+        }
+
+        /* Smooth toggle animation */
+        #single_fields,
+        #bulk_fields {
+            transition: all 0.5s ease;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <h1>Lesion Classifier</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="section">
+            <label>Upload Type:</label>
+            <select name="upload_type" onchange="toggleFields(this.value)">
+                <option value="single">Single Upload</option>
+                <option value="bulk">Bulk Upload</option>
+            </select>
+        </div>
+
+        <div id="single_fields" class="section">
+            <input type="text" name="name" placeholder="Patient Name" required>
+            <input type="text" name="phone" placeholder="Phone" required>
+            <input type="file" name="image" accept="image/*" required>
+        </div>
+
+        <div id="bulk_fields" class="section" style="display:none;">
+            <input type="file" name="bulk_images" accept="image/*" multiple>
+        </div>
+
+        <button type="submit">Upload</button>
+    </form>
+</div>
+
+<script>
+function toggleFields(value) {
+    document.getElementById('single_fields').style.display = value === 'single' ? 'block' : 'none';
+    document.getElementById('bulk_fields').style.display = value === 'bulk' ? 'block' : 'none';
+}
+</script>
+</body>
+</html>
